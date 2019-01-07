@@ -1,7 +1,8 @@
 <template>
-    <div class="container">
-        <h5 class='title'>随机测评</h5>
+    <div class="full-container">
+        <h5 class='page-title'>随机测评</h5>
         <div class="card-wpt">
+            <div class="card-title">当前进度：{{count}} / 45</div>
             <div class="card" >
                 <div class="box" @click='toggle(true)'>{{hiragana}}</div>
                 <div class="box" @click='toggle(false)'>{{katakana}}</div>
@@ -11,7 +12,7 @@
                 <button class='btn right btn-success' @click='remember'>√</button>
             </div>
         </div>
-        <div class="bottom">
+        <div class="page-bottom bottom">
             <router-link class='btn btn-primary left' to="/">基础音图</router-link>
             <router-link class='btn btn-default right' to="/list">生词本</router-link>
         </div>
@@ -25,6 +26,8 @@ export default {
     data () {
         return {
             ind: [0, 0],
+            indArr: [],
+            count: 0,
         }
     },
     computed: {
@@ -37,7 +40,15 @@ export default {
     },
     methods: {
         generateInd () {
-            this.ind = [this.getRandom(10), this.getRandom(5)];
+            let arr = this.indArr;
+            if (arr.length === 0) {
+                this.initIndArr(); 
+                this.count = 0;
+            }
+            let index = this.getRandom(arr.length);
+            this.ind =  arr[index];
+            this.indArr.splice(index, 1);
+            this.count ++;
         },
         getRandom (max, min = 0) {
             return Math.floor(Math.random() * (max - min));
@@ -74,30 +85,44 @@ export default {
                 box[1].style.transform = "rotateY(-180deg)";
                 box[0].style.transform = "rotateY(0deg)";
             }
+        },
+        initIndArr () {
+            let k = 0;
+            for(let i = 0; i< 10; i++) {
+                for(let j = 0; j<5; j++) {
+                    if(i === 7 && j === 1) continue;
+                    if(i === 7 && j === 3) continue;
+                    if(i === 9 && j === 1) continue;
+                    if(i === 9 && j === 2) continue;
+                    if(i === 9 && j === 3) continue;
+                    this.indArr[k ++] = [i, j];
+                }
+            }
         }
     },
     created () {
+        this.initIndArr();
         this.generateInd();
     }
 }
 </script>
 
 <style scoped>
-.container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 .card-wpt{
     width: 50%;
     margin: 0 auto;
+}
+.card-title{
+    text-align: center;
+    margin-bottom: .625rem;
+    color: #08979c;
+    font-size: .875rem;
 }
 .card{
     width: 100%;
     height: 50vw;
     line-height: 50vw;
-    font-size: 7rem;
+    font-size: 8rem;
     text-align: center;
     position: relative;
     perspective: 1500;
@@ -113,47 +138,19 @@ export default {
     transition: all 1s;
     backface-visibility: hidden;
     cursor: pointer;
-    border: 2px dashed #999;
-    background: #FAF9DE;
+    background: url(../assets/wordBg.png) no-repeat;
+    background-size: contain;
+    background-color: #FAF9DE;
 }
 .box:last-child{
     transform: rotateY(-180deg);
 }
 .btn-group{
-    margin-top: 1rem;
+    margin-top: 0.625rem;
     overflow: hidden;
 }
-.btn{
-    background: #fff;
-    padding: 4px 10px;
-    border: 1px solid #aaa;
-    box-sizing: content-box;
-    border-radius: 3px;
-    font-size: .8rem;
-}
-.btn-danger{
-  background: red;
-  border-color: darkred;
-  color: #fff;
-}
-.btn-success{
-    background: #73d13d;
-    border-color: green;
-    color: #fff;
-}
-.btn-primary{
-    background: darkcyan;
-    border-color: #777;
-    color: #eee;
-}
-.title{
-    background: darkcyan;
-    padding: 10px 20px;
-    color: #fff;
-    font-weight: 100;
-}
-.bottom{
-    padding: 0 10vw 10px;
+.bottom {
+    padding: 0.625rem 1.25rem;
 }
 </style>
 

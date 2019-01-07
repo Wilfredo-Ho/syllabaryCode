@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div>
+    <div class="full-container">
+        <div class='container'>
             <div class="btn-group">
                 <button :class="['btn', isHiragana && 'active']" @click='toggle(true)'>平假名</button>
                 <button :class="['btn', isHiragana || 'active']" @click='toggle(false)'>片假名</button>
@@ -12,10 +12,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="overflow: hidden;">
-            <router-link to='/test' class='btn btn-primary left'>开始测评</router-link>
-            <router-link to='/list' class='btn btn-default right'>生词表</router-link>
+            <div class='page-bottom'>
+                <router-link to='/test' class='btn btn-primary left'>开始测评</router-link>
+                <router-link to='/list' class='btn btn-default right'>生词本</router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -45,69 +45,34 @@ export default {
 
 <style scoped>
     .container{
-        width: 70%;
-        margin: 0 auto;
-    }
-    .btn-group{
-        margin-bottom: 10px;
+        width: 80%;
+        margin: 1rem auto;
         text-align: center;
     }
     .btn-group .btn{
-        font-size: .6rem;
+        font-size: 0.75rem;
+    }
+    .grid{
+        margin-top: 0.625rem;
     }
     .cell{
         display: inline-block;
-        width: 20%;
-        height: 14vw;
-        line-height: 14vw;
+        width: 3.25rem;
+        height: 3.25rem;
+        line-height: 3.25rem;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         border-left: 1px solid #ccc;
         border-top: 1px solid #ccc;
         box-sizing: border-box;
         background: #FAF9DE;
+        vertical-align: top;
     }
-    .row:last-child{
+    .row:last-child .cell{
         border-bottom: 1px solid #ccc;
     }
     .row .cell:last-child{
         border-right: 1px solid #ccc;
-    }
-    .btn {
-        padding: 6px 16px;
-        background: #fff;
-        border: 1px solid #aaa;
-        border-radius: 4px;
-        display: inline-block;
-        font-size: 0.8rem;
-    }
-    .btn.active{
-        background: green;
-        color: #fff;
-        border-color: darkgreen;
-    }
-    .btn-primary{
-        background: darkcyan;
-        border-color: #777;
-        color: #eee;
-    }
-    .btn-default{
-        background: #fefefe;
-        border-color: gray;
-        color: #333;
-    }
-
-    @media screen and (max-width: 1000px){
-        .container{
-            width: 70%;
-            margin: 0 auto;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 16px 0;
-            box-sizing: border-box;
-        }
     }
 </style>
 

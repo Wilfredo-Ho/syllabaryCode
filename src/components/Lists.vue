@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h5 class='title'>生词本</h5>
+        <h5 class='page-title'>生词本</h5>
         <div class="list-wpt" v-if='arr.length>0'>
             <div class="list-title">
                 <span class="col col1">读音</span>
@@ -9,7 +9,7 @@
                 <span class="col col4">频率</span>
             </div>
             <ul class="list-body" >
-                <li v-for="(item, index) in arr" :key="index" class='list-item'>
+                <li v-for="(item, index) in arr" :key="index" :class='["list-item", item.count >= 2 && "list-item-notice"]'>
                     <span class="col col1">{{item.s}}</span>
                     <span class="col col2">{{item.hira}}</span>
                     <span class="col col3">{{item.kata}}</span>
@@ -49,7 +49,6 @@ export default {
     },
     created () {
         let obj = JSON.parse(window.localStorage.getItem('wordIndexArr'));
-        console.log(obj);
         let arr = [];
         for (let i in obj) {
             let ind = i.split('');
@@ -84,31 +83,36 @@ export default {
     text-align: center;
     color: #aaa;
     font-size: 0.8rem;
-    margin-top: 30vh;
+    margin-top: 10rem;
 }
 .list-wpt{
-    margin-top: 10px;
+    margin-top: 0.625rem;
     background: #fff;
+    padding: 0.625rem 0;
 }
 .list-title{
     font-weight: 500;
     color: darkgreen;
     border-bottom: 1px solid darkgreen; 
-    margin: 0 20px;
-    padding: 4px 0;
-    font-size: .8rem;
+    margin: 0 1.25rem;
+    padding: 0.375rem 0;
+    font-size: .875rem;
 }
 .list-body{
     list-style: none;
-    padding: 0 20px;
+    padding: 0 1.25rem;
     color: #636363;
-    font-size: .8rem;
-    max-height: calc(100vh - 134px);
+    font-size: .875rem;
+    max-height: calc(100vh - 10.6rem);
     overflow-y: auto;
 }
 .list-item{
     border-bottom: 1px solid #e3e3e3;
-    padding: 4px 0;
+    padding: .3125rem 0;
+}
+.list-item-notice{
+    background: #fff1b8;
+    color: #000;
 }
 .list-item:last-child{
     border-bottom: none;
@@ -133,7 +137,7 @@ export default {
     font-size: .8rem;
 }
 .btn-group{
-    margin: 10px 0;
+    margin: 1.25rem 0 0.625rem;
     text-align: center;
 }
 .modal-bg{

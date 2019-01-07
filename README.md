@@ -2,20 +2,36 @@
 
 > 日语50音
 
-## Build Setup
+### 介绍
+包括三个页面：
+    1. 50音图页
+        * 平假名 / 片假名 切换
+        * 开始评测
+        * 生词表
+    2. 随机评测页
+        * 平假名 / 片假名 切换
+        * 记住 / 没记住
+        * 返回50音
+        * 进入生词表
+    3. 生词表页
+        * 生词表列表
+        * 清空生词表
+        * 开始评测
 
-``` bash
-# install dependencies
-npm install
+### To be fixed
+    1. [x] 整体适配性方案: 整体基于rem + @media
+    2. [x] UI 统一性方案
+    1. 50音图页
+        * [x] 页面适配性问题
+    2. 随机评测页
+        * [ ] ~~加入音标？~~
+        * [x] 算法优化： 随机出现测试音标，但是得保证每个出现一次
+    3. 生词表页
+        * [x] 页面适配问题
+        * [x] ~~按照出现频率排序~~将高频率做颜色区分
+        * [x] 多个重复的合并（类似多个e显示，从评测页优化）
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 拓展
+    1. 完成进度显示
+    2. 语音包嵌入
+    3. 词句学习
